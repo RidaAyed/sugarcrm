@@ -25,6 +25,24 @@ Example Usage
     url = "http://your-sugarcrm-domain/service/v4/rest.php"
     session = sugarcrm.Session(url, username, password)
 
+    # get account
+    account = Account(name='t2')
+    results = session.get_entry_list(account)
+    account_id = results[0].id
+
+    # update
+    account = Account(id=account_id)
+    account.description = "New description"
+    session.set_entry(account)
+
+    # check if item updated
+    results = session.get_entry_list(account)
+    print(results)
+
+    # create
+    account = Account(name='bam', description="New description")
+    session.set_entry(account)
+
     # Create a new note
     note = sugarcrm.Note(name="Test Note")
 
@@ -67,23 +85,6 @@ Example Usage
                     emails.add(getattr(contact, field).lower())
     print "Found %d emails" % len(emails)
 
-    # get account
-    account = Account(name='t2')
-    results = session.get_entry_list(account)
-    account_id = results[0].id
-
-    # update
-    account = Account(id=account_id)
-    account.description = "New description"
-    session.set_entry(account)
-
-    # check if item updated
-    results = session.get_entry_list(account)
-    print(results)
-
-    # create
-    account = Account(name='bam', description="New description")
-    session.set_entry(account)
 
 Install
 -------

@@ -16,6 +16,7 @@ Python client for SugarCRM API.
 Example Usage Account
 ---------------------
 .. code-block:: python
+
     import sugarcrm
 
     # Connect

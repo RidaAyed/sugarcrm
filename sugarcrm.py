@@ -141,8 +141,18 @@ class Session:
     def get_modified_relationships(self):
         raise SugarError("Method not implemented yet.")
 
-    def get_module_fields(self):
-        raise SugarError("Method not implemented yet.")
+    def get_module_fields(self, module):
+        '''
+        Get module model fields
+
+        :param module: module name 
+        :type module: str
+        :return: dict of module fields options
+        :rtype: dict
+        '''
+        data = [self.session_id, module]
+        results = self._request('get_module_fields', data)
+        return results
 
     def get_module_fields_md5(self):
         raise SugarError("Method not implemented yet.")

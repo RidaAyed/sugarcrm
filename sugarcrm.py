@@ -377,5 +377,9 @@ class Account(SugarObject):
     module = "Accounts"
 
 
+class Meeting(SugarObject):
+    module = "Meetings"
+
+
 class SugarError(Exception):
     pass

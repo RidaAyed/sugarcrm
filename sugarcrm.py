@@ -391,5 +391,9 @@ class Meeting(SugarObject):
     module = "Meetings"
 
 
+class Task(SugarObject):
+    module = "Tasks"
+
+
 class SugarError(Exception):
     pass

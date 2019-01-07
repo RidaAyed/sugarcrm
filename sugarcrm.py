@@ -22,12 +22,14 @@ import requests
 class Session:
 
     def __init__(self, url, username, password, app="Python", lang="en_us",
-                 verify=True):
+                 verify=True, proxies=None):
         self.url = url
         self.username = username
         self.application = app
         self.language = lang
         self.verify = verify
+        self.proxies = proxies
+
         result = self.login(username, password)
         self.session_id = result['id']
 
@@ -38,7 +40,7 @@ class Session:
             'response_type': "JSON",
             'rest_data': json.dumps(params),
         }
-        r = requests.post(self.url, data=data, verify=self.verify)
+        r = requests.post(self.url, data=data, verify=self.verify, proxies=self.proxies)
         if r.status_code == 200:
             return json.loads(r.text.replace("&#039;", "'"))
         raise SugarError("SugarCRM API _request returned status code %d (%s)"

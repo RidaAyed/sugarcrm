@@ -22,7 +22,7 @@ import requests
 class Session:
 
     def __init__(self, url, username, password, app="Python", lang="en_us",
-                 verify=True, proxies=None):
+                 verify=True, proxies=None, auth=None):
         self.url = url
         self.username = username
         self.application = app
@@ -30,7 +30,7 @@ class Session:
         self.verify = verify
         self.proxies = proxies
 
-        result = self.login(username, password)
+        result = self.login(username, password, auth=auth)
         self.session_id = result['id']
 
     def _request(self, method, params):

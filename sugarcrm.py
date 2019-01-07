@@ -212,8 +212,9 @@ class Session:
         '''
         return password
 
-    def login(self, username, password, app="Python", lang="en_us", auth=Session.remote_auth):
+    def login(self, username, password, app="Python", lang="en_us", auth=None):
         """Logs a user into the SugarCRM application."""
+        auth = auth if auth and callable(auth) else Session.remote_auth
         data = [
             {
                 'user_name': username,

@@ -198,12 +198,26 @@ class Session:
     def job_queue_run(self):
         raise SugarError("Method not implemented yet.")
 
-    def login(self, username, password, app="Python", lang="en_us"):
+    @staticmethod
+    def remote_auth(password):
+        '''
+        Remote authentication
+        '''
+        return hashlib.md5(password.encode('utf8')).hexdigest()
+
+    @staticmethod
+    def local_auth(password):
+        '''
+        Local authentication
+        '''
+        return password
+
+    def login(self, username, password, app="Python", lang="en_us", auth=Session.remote_auth):
         """Logs a user into the SugarCRM application."""
         data = [
             {
                 'user_name': username,
-                'password': hashlib.md5(password.encode('utf8')).hexdigest()
+                'password': auth(password)
             },
             app,
             [{
